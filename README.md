@@ -303,5 +303,3 @@ For questions or issues:
 - Review the API documentation
 
 ---
-
-**Built with ❤️ using modern web technologies**
