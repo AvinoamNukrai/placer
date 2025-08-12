@@ -8,6 +8,8 @@ const QuerySchema = z.object({
   chain_name: z.string().trim().min(1).optional(),
   dma: z.coerce.number().int().optional(),
   category: z.string().trim().min(1).optional(),
+  city: z.string().trim().min(1).optional(),
+  state: z.string().trim().min(1).optional(),
   is_open: z.enum(['all', 'open', 'closed']).optional().default('all'),
   page: z.coerce.number().int().positive().optional().default(1),
   page_size: z.coerce.number().int().positive().max(100).optional().default(25),
@@ -24,6 +26,8 @@ poisRouter.get('/', async (req, res, next) => {
     if (q.chain_name) where.push(`LOWER(chain_name) = LOWER($chain_name)`);
     if (q.dma !== undefined) where.push(`dma = $dma`);
     if (q.category) where.push(`LOWER(category) = LOWER($category)`);
+    if (q.city) where.push(`LOWER(city) = LOWER($city)`);
+    if (q.state) where.push(`LOWER(state) = LOWER($state)`);
     if (q.is_open !== 'all') where.push(`is_open = ${q.is_open === 'open' ? 1 : 0}`);
 
     const whereSql = where.length ? 'WHERE ' + where.join(' AND ') : '';
@@ -36,6 +40,8 @@ poisRouter.get('/', async (req, res, next) => {
     if (q.chain_name) params.$chain_name = q.chain_name;
     if (q.dma !== undefined) params.$dma = q.dma;
     if (q.category) params.$category = q.category;
+    if (q.city) params.$city = q.city;
+    if (q.state) params.$state = q.state;
 
     const items = execRows(
       db,
