@@ -2,14 +2,22 @@ type Props = {
   options?: { chain_names: string[]; dmas: number[]; categories: string[] }
   filters: any
   onChange: (next: any) => void
+  onSubmit: () => void
+  onReset: () => void
 }
 
-export function FiltersPanel({ options, filters, onChange }: Props) {
-  const set = (patch: any) => onChange({ ...filters, page: 1, ...patch })
+export function FiltersPanel({ options, filters, onChange, onSubmit, onReset }: Props) {
+  const set = (patch: any) => onChange({ ...filters, ...patch })
 
   return (
     <div className="card">
-      <h2>Filters</h2>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+        <h2 style={{ margin: 0 }}>Filters</h2>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button className="btn-secondary" onClick={onReset}>Reset</button>
+          <button className="btn" onClick={onSubmit}>Search</button>
+        </div>
+      </div>
       <div className="grid">
         <label>
           <span>Chain</span>
