@@ -1,0 +1,23 @@
+{
+  "name": "placer-bigbox",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:db": "tsx scripts/build_db.ts",
+    "test:db": "tsx scripts/test_db.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "@types/sql.js": "^1.4.9",
+    "tsx": "^4.7.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "sql.js": "^1.11.0"
+  }
+}
